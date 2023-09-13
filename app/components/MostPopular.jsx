@@ -2,21 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
-// hello i'am home computer;
+// hello i'am desctop computer;
 
-import { Card, 
-        CardHeader, 
-        CardBody, 
-        CardFooter, 
-        Image, 
-        Stack, 
-        Heading, 
-        Divider, 
-        Button, 
-        ButtonGroup, 
-        Text,
-        Flex
-} from '@chakra-ui/react'
+import { Box, Center, Text, Wrap, WrapItem} from '@chakra-ui/react'
+import ProductCard from './ProductCard';
 
 const MostPopular = () => {
     const [productItem, setProductItem] = useState([]);
@@ -36,42 +25,13 @@ const MostPopular = () => {
 
 
   return (
-    <>
-    <Flex justify='space-between'>
-    {productItem.length > 0 ? (
-        productItem.map(el => 
-            <Card maxW='sm' key={el.id}>
-                <CardBody>
-                    <Image
-                    src={el.imageUrl}
-                    alt={el.name}
-                    borderRadius='lg'
-                    />
-                    <Stack mt='6' spacing='3'>
-                    <Heading size='md'>{el.name}</Heading>
-                    <Text>
-                        {el.description}
-                    </Text>
-                    <Text color='blue.600' fontSize='2xl'>
-                        $ {el.price}
-                    </Text>
-                    </Stack>
-                </CardBody>
-                <Divider />
-                <CardFooter>
-                    <ButtonGroup spacing='2'>
-                    <Button variant='solid' colorScheme='blue'>
-                        Buy now
-                    </Button>
-                    <Button variant='ghost' colorScheme='blue'>
-                        Add to cart
-                    </Button>
-                    </ButtonGroup>
-                </CardFooter>
-            </Card>)
-    ): (null)}
-    </Flex>
-    </>
+    
+    <Box m='6' borderWidth='1px'>
+    <Center><Text fontSize='4xl'>Most popular</Text></Center>
+    <Wrap justify='space-evenly' spacing='auto' >
+        {productItem.length > 0 ? ( productItem.map(el => <WrapItem m='6'><Center><ProductCard key={el.id} productItem={el} /></Center></WrapItem>) ) : ( null )}
+    </Wrap>
+    </Box>
   )
 }
 
