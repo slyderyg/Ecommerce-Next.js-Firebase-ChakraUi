@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
+// hello i'am home computer;
 
 import { Card, 
         CardHeader, 
