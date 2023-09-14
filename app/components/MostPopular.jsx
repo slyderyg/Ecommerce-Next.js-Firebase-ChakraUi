@@ -29,7 +29,7 @@ const MostPopular = () => {
     <Box m='6' borderWidth='1px'>
     <Center><Text fontSize='4xl'>Most popular</Text></Center>
     <Wrap justify='space-evenly' spacing='auto' >
-        {productItem.length > 0 ? ( productItem.map(el => <WrapItem m='6'><Center><ProductCard key={el.id} productItem={el} /></Center></WrapItem>) ) : ( null )}
+        {productItem.length > 0 ? ( productItem.map(el => <WrapItem key={el.id} m='6'><Center><ProductCard productItem={el} /></Center></WrapItem>) ) : ( null )}
     </Wrap>
     </Box>
   )
