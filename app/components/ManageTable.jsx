@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 
 import { Center, TableContainer, Table, Thead, Tbody, Tr, Th, Td, Button, Box} from '@chakra-ui/react';
 
-import { collection, query, where, onSnapshot } from 'firebase/firestore';
+import { collection, query, where, onSnapshot, doc, deleteDoc } from 'firebase/firestore';
+
+import { getStorage, ref, deleteObject } from "firebase/storage";
 
 import { db } from '../firebase';
+
 import EditProductItemModal from "./EditProductItemModal";
 
 const ManageTable = () => {
@@ -24,6 +27,21 @@ const ManageTable = () => {
             setProductItem(productsArr);
         });
     }, []);
+    // handler for deleting product item
+    const handleDeleteDoc = async (id) => {
+        await deleteDoc(doc(db, "products", id));
+    };
+
+    const handleDeleteImg = (imageName) => {
+        const storage = getStorage();
+        const desertRef = ref(storage, imageName);
+        
+        deleteObject(desertRef).then(() => {
+        
+        }).catch((error) => {
+        
+        });
+    };
 
 
     return (
@@ -48,7 +66,7 @@ const ManageTable = () => {
                                 <Td isNumeric>{el.price}</Td>
                                 <Td w='200px'>
                                     <EditProductItemModal props={el} />
-                                    <Button colorScheme='red' size='xs' m='1'>Delete</Button>
+                                    <Button colorScheme='red' size='xs' m='1' onClick={() => {handleDeleteDoc(el.id); handleDeleteImg(el.imageName)}}>Delete</Button>
                                 </Td>
                             </Tr>
                             )) : (null)}

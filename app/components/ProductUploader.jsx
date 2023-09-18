@@ -43,7 +43,8 @@ const ProductUploader = () => {
                     name: productName,
                     price: productPrice,
                     description: productDescription,
-                    imageUrl: imageUrl
+                    imageUrl: imageUrl,
+                    imageName: imageName
                 });
             } catch (e) {
               console.error("Error adding document: ", e);
