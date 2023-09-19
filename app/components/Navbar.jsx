@@ -74,13 +74,13 @@ const Navbar = () => {
                 <Box ml='6'>
                     <Link as={NextLink} href='/'>CONTACTS</Link>
                 </Box>
+                <Box ml='6'>
+                        <Link as={NextLink} href='/' color='green' ><Image src='/cart.svg'  boxSize='30px' alt='cart' /></Link>
+                    </Box>
                 {user? 
                 <>
                     <Box ml='6'>
                         <Link as={NextLink} href='/dashboard' color='green' >DASHBOARD</Link>
-                    </Box>
-                    <Box ml='6'>
-                        <Link as={NextLink} href='/' color='green' ><Image src='/cart.svg'  boxSize='30px' alt='cart' /></Link>
                     </Box>
                 </>
                 :
