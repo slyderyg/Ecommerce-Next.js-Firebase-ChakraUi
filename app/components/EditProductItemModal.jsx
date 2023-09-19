@@ -1,4 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+
+import { doc, updateDoc } from "firebase/firestore";
+
+import { db } from '../firebase';
+
 import { useDisclosure,
             Modal, 
             ModalOverlay,
@@ -13,8 +18,6 @@ import { useDisclosure,
             Input,
             Textarea
          } from '@chakra-ui/react';
-
-
 
 const EditProductItemModal = ( { props } ) => {
 
@@ -35,15 +38,25 @@ const EditProductItemModal = ( { props } ) => {
         let inputValue = e.target.value;
         setProductDescription(inputValue);
     };
+
+    const handleClick = async () => {
+        const productRef = doc(db, "products", props.id);
+        await updateDoc(productRef, {
+            name: productName,
+            price: productPrice,
+            description: productDescription
+          });
+          onClose();
+    };
     
     return (
         <>
-            <Button colorScheme='teal' size='xs' m='1' onClick={onOpen}>Edit</Button>
+            <Button colorScheme='teal' size='xs' m='1' onClick={ onOpen }>Edit</Button>
 
-            <Modal isOpen={isOpen} onClose={onClose}>
+            <Modal isOpen={ isOpen } onClose={ onClose }>
             <ModalOverlay />
             <ModalContent>
-                <ModalHeader>{props.name}</ModalHeader>
+                <ModalHeader>{ props.name }</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
 
@@ -53,12 +66,10 @@ const EditProductItemModal = ( { props } ) => {
 
                         <Stack spacing={3} m='3'>
 
-                            <Input variant='outline' placeholder='Product name' value={productName} onChange={handleProductNameInput} />
-                            <Input type='number' placeholder='$ Price' value={productPrice} onChange={handleProductPriceInput}/>
-                            <Textarea placeholder='Description' value={productDescription} onInput={handleProductDescriptionInput}/>
-                            <Input variant='unstyled' type='file'  />
-
-
+                            <Input variant='outline' placeholder='Product name' value={ productName } onChange={ handleProductNameInput } />
+                            <Input type='number' placeholder='$ Price' value={ productPrice } onChange={ handleProductPriceInput }/>
+                            <Textarea placeholder='Description' value={ productDescription } onInput={ handleProductDescriptionInput }/>
+            
                         </Stack>
 
                     </Box>
@@ -70,10 +81,10 @@ const EditProductItemModal = ( { props } ) => {
                 
                 </ModalBody>
                 <ModalFooter>
-                <Button variant='ghost' mr={3} onClick={onClose}>
+                <Button variant='ghost' mr={3} onClick={ onClose }>
                     Close
                 </Button>
-                <Button colorScheme='teal' size='md'>Apply</Button>
+                <Button colorScheme='teal' size='md' onClick={ handleClick }>Apply</Button>
                 </ModalFooter>
             </ModalContent>
             </Modal>

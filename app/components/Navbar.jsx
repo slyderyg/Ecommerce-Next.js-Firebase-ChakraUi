@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from 'react'
-
+import React, { useEffect, useState } from 'react';
 import NextLink from 'next/link';
-
-import { UserAuth } from '../context/AuthContext'
-
+import { UserAuth } from '../context/AuthContext';
 import { 
         Image, 
         Flex, 
@@ -22,8 +19,7 @@ import {
         IconButton,
         Avatar
 } from '@chakra-ui/react';
-
-import { HamburgerIcon } from '@chakra-ui/icons'
+import { HamburgerIcon } from '@chakra-ui/icons';
 
 
 const Navbar = () => {
@@ -78,9 +74,18 @@ const Navbar = () => {
                 <Box ml='6'>
                     <Link as={NextLink} href='/'>CONTACTS</Link>
                 </Box>
-                <Box ml='6'>
-                    <Link as={NextLink} href='/dashboard' color='green' >DASHBOARD</Link>
-                </Box>
+                {user? 
+                <>
+                    <Box ml='6'>
+                        <Link as={NextLink} href='/dashboard' color='green' >DASHBOARD</Link>
+                    </Box>
+                    <Box ml='6'>
+                        <Link as={NextLink} href='/' color='green' ><Image src='/cart.svg'  boxSize='30px' alt='cart' /></Link>
+                    </Box>
+                </>
+                :
+                null
+                }
             </Flex>
             <Spacer />
             <Center height='100px' ml='6' mt='3'>
@@ -131,16 +136,16 @@ const Navbar = () => {
                     />
                     <MenuList>
                         <MenuItem>
-                        HOME
+                            <Link as={NextLink} href='/'>HOME</Link>
                         </MenuItem>
                         <MenuItem>
-                        CATALOG
+                            <Link as={NextLink} href='/'>CATALOG</Link>
                         </MenuItem>
                         <MenuItem>
-                        ABOUT
+                            <Link as={NextLink} href='/'>ABOUT</Link>
                         </MenuItem>
                         <MenuItem>
-                        CONTACTS
+                            <Link as={NextLink} href='/'>CONTACTS</Link>
                         </MenuItem>                                                                     
                     </MenuList>
                 </Menu>
@@ -150,6 +155,12 @@ const Navbar = () => {
             <Flex alignItems='center'>
                 <Box m='1'>
                     <Avatar size='sm' name={user.displayName} src={user.photoURL} />
+                </Box>
+                <Box m='1'>
+                    <Button colorScheme='teal' size='xs' onClick={handleSignOut}>Sign out</Button>
+                </Box>  
+                <Box ml='6'>
+                    <Link as={NextLink} href='/' color='green' ><Image src='/cart.svg'  boxSize='30px' alt='cart' /></Link>
                 </Box>
 
                 <Box m='6'>
@@ -162,25 +173,20 @@ const Navbar = () => {
                         />
                         <MenuList>
                             <MenuItem>
-                            HOME
+                                <Link as={NextLink} href='/'>HOME</Link>
                             </MenuItem>
                             <MenuItem>
-                            CATALOG
+                                <Link as={NextLink} href='/'>CATALOG</Link>
                             </MenuItem>
                             <MenuItem>
-                            ABOUT
+                                <Link as={NextLink} href='/'>ABOUT</Link>
                             </MenuItem>
                             <MenuItem>
-                            CONTACTS
-                            </MenuItem> 
+                                <Link as={NextLink} href='/'>CONTACTS</Link>
+                            </MenuItem>     
                             <MenuItem>
                             <Link as={NextLink} href='/dashboard' color='green' >DASHBOARD</Link>
-                            </MenuItem> 
-                            <MenuItem>
-                                <Box m='1'>
-                                    <Button colorScheme='teal' size='xs' onClick={handleSignOut}>Sign out</Button>
-                                </Box>   
-                            </MenuItem>                                                                  
+                            </MenuItem>                                                                 
                         </MenuList>
                     </Menu>
                 </Box>
