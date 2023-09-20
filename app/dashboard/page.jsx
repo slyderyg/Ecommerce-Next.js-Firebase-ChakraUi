@@ -25,6 +25,7 @@ const page = () => {
                                     <TabList>
                                         <Tab>Manage</Tab>
                                         <Tab>Add new product</Tab>
+                                        <Tab>Orders</Tab>
                                     </TabList>
                                     <TabPanels>
 

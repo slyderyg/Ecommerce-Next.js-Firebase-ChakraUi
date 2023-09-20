@@ -75,7 +75,7 @@ const Navbar = () => {
                     <Link as={NextLink} href='/'>CONTACTS</Link>
                 </Box>
                 <Box ml='6'>
-                        <Link as={NextLink} href='/' color='green' ><Image src='/cart.svg'  boxSize='30px' alt='cart' /></Link>
+                        <Link as={NextLink} href='/cart' color='green' ><Image src='/cart.svg'  boxSize='30px' alt='cart' /></Link>
                     </Box>
                 {user? 
                 <>
@@ -160,7 +160,7 @@ const Navbar = () => {
                     <Button colorScheme='teal' size='xs' onClick={handleSignOut}>Sign out</Button>
                 </Box>  
                 <Box ml='6'>
-                    <Link as={NextLink} href='/' color='green' ><Image src='/cart.svg'  boxSize='30px' alt='cart' /></Link>
+                    <Link as={NextLink} href='/cart' color='green' ><Image src='/cart.svg'  boxSize='30px' alt='cart' /></Link>
                 </Box>
 
                 <Box m='6'>
