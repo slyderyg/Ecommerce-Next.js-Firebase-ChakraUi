@@ -1,15 +1,28 @@
 'use client';
-import React from "react";
+import React, { useContext, useState } from 'react';
 import CartItem from "../components/CartItem";
-import { Center, Box, Flex, Image, Stack, Heading, Text, NumberInput, NumberInputField, Button, Spacer, Table, Tbody, Tr, Td, TableContainer, Tfoot, Th } from "@chakra-ui/react";
+import { Center, Box, Flex, Stack, Button, Table, Tbody, Tr, Td, TableContainer, Tfoot, Th } from "@chakra-ui/react";
+import { CartItemContext } from '../context/CartContext';
 
 const page = () => {
+    const data = useContext(CartItemContext);
+    
+    const [totalQuantity, setTotalQuantity] = useState(data.cartData.length);
+
+    const handleTotalIncrement = () => {
+        setTotalQuantity(totalQuantity + 1)
+    };
+
+    const handleTotalDecrement = () => {
+        totalQuantity < 1 ? (null) : (setTotalQuantity(totalQuantity - 1));
+    };
+
     return (
         <Center>
             <Flex w>
 
                 <Box m='6'>
-                    <CartItem />
+                    {data.cartData.map(el => <CartItem key={el.id} data={el} handleTotalIncrement={handleTotalIncrement} handleTotalDecrement={handleTotalDecrement}/> )}
                 </Box>
 
                 <Box borderWidth='1px' borderRadius='lg' w='300px' h='250px' overflow='hidden' m='6'>
@@ -19,19 +32,15 @@ const page = () => {
                             <Table variant='simple'>
                                 <Tbody>
                                 <Tr>
-                                    <Td>1 item</Td>
-                                    <Td isNumeric size='sm'>25.4</Td>
-                                </Tr>
-                                <Tr>
-                                    <Td>delivery</Td>
-                                    <Td isNumeric size='sm'>0</Td>
+                                    <Td>{totalQuantity} item</Td>
+                                    <Td isNumeric size='sm'>{}</Td>
                                 </Tr>
                                 </Tbody>
                                 <Tfoot>
                                     <Tr>
                                         <Th>TOTAL</Th>
 
-                                        <Th isNumeric>250</Th>
+                                        <Th isNumeric>{}</Th>
                                     </Tr>
                                 </Tfoot>
                             </Table>

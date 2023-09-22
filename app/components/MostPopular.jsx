@@ -1,14 +1,14 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
-// hello i'am desctop computer;
-
+import { CartItemContext } from '../context/CartContext';
 import { Box, Center, Text, Wrap, WrapItem} from '@chakra-ui/react'
 import ProductCard from './ProductCard';
 
 const MostPopular = () => {
     const [productItem, setProductItem] = useState([]);
+    const data = useContext(CartItemContext);
 
     useEffect(() => {
         const q = query(collection(db, 'products'));
@@ -23,13 +23,12 @@ const MostPopular = () => {
         });
     }, [])
 
-
   return (
     
     <Box m='6' borderWidth='1px'>
     <Center><Text fontSize='4xl'>Most popular</Text></Center>
     <Wrap justify='space-evenly' spacing='auto' >
-        {productItem.length > 0 ? ( productItem.map(el => <WrapItem key={el.id} m='6'><Center><ProductCard productItem={el} /></Center></WrapItem>) ) : ( null )}
+        {productItem.length > 0 ? ( productItem.map(el => <WrapItem key={el.id} m='6'><Center><ProductCard productItem={el} data={data.handleAddToCart}/></Center></WrapItem>) ) : ( null )}
     </Wrap>
     </Box>
   )

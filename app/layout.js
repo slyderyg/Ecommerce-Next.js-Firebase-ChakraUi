@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import './globals.css';
 import { Providers } from './providers';
 import { AuthContextProvider } from './context/AuthContext';
+import CartContext from './context/CartContext';
 
 export const metadata = {
   title: 'Ecommerce',
@@ -15,8 +16,10 @@ export default function RootLayout({ children }) {
       <body>
       <AuthContextProvider>
           <Providers>
+            <CartContext>
             <Navbar />
             {children}
+            </CartContext>
           </Providers>
         </AuthContextProvider>
       </body>

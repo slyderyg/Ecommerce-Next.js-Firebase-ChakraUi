@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Image, Stack, Heading, Text, Button, ButtonGroup } from '@chakra-ui/react';
 
-const ProductCard = ({ productItem }) => {
+const ProductCard = ({ productItem, data }) => {
   return (
 
     <Box borderWidth='1px' borderRadius='lg' w='350px' h='520px' overflow='hidden'>
@@ -22,7 +22,7 @@ const ProductCard = ({ productItem }) => {
         <Button variant='solid' colorScheme='blue'>
           Buy now
         </Button>
-        <Button variant='ghost' colorScheme='blue'>
+        <Button variant='ghost' colorScheme='blue' onClick={() => data(productItem.name, productItem.price, productItem.description, productItem.imageUrl, productItem.id)}>
            Add to cart
         </Button>
       </ButtonGroup>
