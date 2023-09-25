@@ -1,18 +1,22 @@
 'use client';
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Center, Box, Flex, Image, Stack, Heading, Text, Input, Button, Spacer } from "@chakra-ui/react";
+import { CartItemContext } from "../context/CartContext";
 
 const CartItem = ({data, handleTotalIncrement, handleTotalDecrement}) => {
+    const data2 = useContext(CartItemContext);
     const [quantity, setQuantity] = useState(1);
 
     const handleIncrement = () => {
         setQuantity(quantity + 1);
         handleTotalIncrement();
+        data2.handleSearch(data, (quantity + 1));
     };
 
     const handleDecrement = () => {
         quantity < 1 ? (null) : (setQuantity(quantity - 1));
         quantity < 1 ? (null) : (handleTotalDecrement());
+        quantity < 1 ? (null) : (data2.handleSearch(data, (quantity - 1)));
     };
 
     const handleChange = (e) => {
@@ -50,7 +54,7 @@ const CartItem = ({data, handleTotalIncrement, handleTotalDecrement}) => {
 
                     <Box w='100px'>
                         <Center>
-                            <Input w='42px' type='number' value={quantity} onChange={handleChange}/>
+                            <Input w='55px' type='number' value={quantity} onChange={handleChange}/>
                         </Center>
                     </Box>
 

@@ -1,5 +1,5 @@
 'use client';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useLayoutEffect, useState } from 'react';
 import CartItem from "../components/CartItem";
 import { Center, Box, Flex, Stack, Button, Table, Tbody, Tr, Td, TableContainer, Tfoot, Th } from "@chakra-ui/react";
 import { CartItemContext } from '../context/CartContext';
@@ -33,14 +33,14 @@ const page = () => {
                                 <Tbody>
                                 <Tr>
                                     <Td>{totalQuantity} item</Td>
-                                    <Td isNumeric size='sm'>{}</Td>
+                                    <Td isNumeric size='sm'>${data.totalPrice}</Td>
                                 </Tr>
                                 </Tbody>
                                 <Tfoot>
                                     <Tr>
-                                        <Th>TOTAL</Th>
+                                        <Th>TOTAL PRICE</Th>
 
-                                        <Th isNumeric>{}</Th>
+                                        <Th isNumeric>${data.totalPrice}</Th>
                                     </Tr>
                                 </Tfoot>
                             </Table>
