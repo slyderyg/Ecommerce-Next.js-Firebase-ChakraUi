@@ -3,19 +3,17 @@ import React, { useState, useContext } from "react";
 import { Center, Box, Flex, Image, Stack, Heading, Text, Input, Button, Spacer } from "@chakra-ui/react";
 import { CartItemContext } from "../context/CartContext";
 
-const CartItem = ({data, handleTotalIncrement, handleTotalDecrement}) => {
+const CartItem = ({ data }) => {
     const data2 = useContext(CartItemContext);
     const [quantity, setQuantity] = useState(1);
 
     const handleIncrement = () => {
         setQuantity(quantity + 1);
-        handleTotalIncrement();
         data2.handleSearch(data, (quantity + 1));
     };
 
     const handleDecrement = () => {
         quantity < 1 ? (null) : (setQuantity(quantity - 1));
-        quantity < 1 ? (null) : (handleTotalDecrement());
         quantity < 1 ? (null) : (data2.handleSearch(data, (quantity - 1)));
     };
 
@@ -27,7 +25,7 @@ const CartItem = ({data, handleTotalIncrement, handleTotalDecrement}) => {
         <Center>
             <Flex borderWidth='1px' borderRadius='lg' w='1000px' h='300px' overflow='hidden' align='center' mb='3'>
                 
-                <Box w='350px' h='230px' m='6'>
+                <Box w='350px' h='230px' m='3'>
                     <Image w='100%' src={data.imageUrl} alt=''/>
                 </Box>
 
@@ -39,7 +37,7 @@ const CartItem = ({data, handleTotalIncrement, handleTotalDecrement}) => {
                     <Text color='blue.600' fontSize='2xl'>
                     $ {data.price}
                     </Text>
-                    <Button colorScheme='red' size='xs' variant='link'>Delete</Button>
+                    <Button colorScheme='red' size='xs' variant='link' onClick={()=>{data2.handleDelete(data.id)}}>Delete</Button>
                 </Stack>
 
                 <Spacer/>
