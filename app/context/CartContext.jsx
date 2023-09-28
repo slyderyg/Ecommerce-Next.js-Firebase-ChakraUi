@@ -33,13 +33,13 @@ const CartContext = (props) => {
 
    useEffect(() => {
         let priceCounter = [...cartData];
-        let counter; 
-        if (priceCounter.length > 1) {counter = priceCounter.reduce((acc, el) => acc.price*acc.quantity + el.price*el.quantity)}
+        let counter = 0; 
+        if (priceCounter.length > 1) {priceCounter.map((el) => {counter += el.price*el.quantity})}
         else if (priceCounter.length === 1) {counter = priceCounter[0].price*priceCounter[0].quantity}
         else (counter = 0);
         setTotalPrice(counter);
-        let quantityCounter;
-        if (priceCounter.length > 1) {quantityCounter = priceCounter.reduce((acc, el) => acc.quantity + el.quantity)}
+        let quantityCounter=0;
+        if (priceCounter.length > 1) {priceCounter.map((el) => {quantityCounter += el.quantity})}
         else if (priceCounter.length === 1) {quantityCounter = priceCounter[0].quantity}
         else (quantityCounter = 0);
         setTotalQuantity(quantityCounter);
@@ -52,7 +52,8 @@ const value = {
     totalPrice,
     handleSearch,
     handleDelete,
-    totalQuantity
+    totalQuantity,
+    setCartData
 };
     return (
         <CartItemContext.Provider value={value}>{props.children}</CartItemContext.Provider>

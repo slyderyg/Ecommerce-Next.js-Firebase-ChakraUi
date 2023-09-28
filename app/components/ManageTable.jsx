@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
-
 import { Center, TableContainer, Table, Thead, Tbody, Tr, Th, Td, Button, Box} from '@chakra-ui/react';
-
 import { collection, query, where, onSnapshot, doc, deleteDoc } from 'firebase/firestore';
-
 import { getStorage, ref, deleteObject } from "firebase/storage";
-
 import { db } from '../firebase';
-
 import EditProductItemModal from "./EditProductItemModal";
 
 const ManageTable = () => {

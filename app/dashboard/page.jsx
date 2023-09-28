@@ -4,6 +4,7 @@ import { UserAuth } from '../context/AuthContext';
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Spinner } from '@chakra-ui/react';
 import ProductUploader from '../components/ProductUploader';
 import ManageTable from '../components/ManageTable';
+import OrderTable from '../components/OrderTable';
 
 const page = () => {
 
@@ -25,7 +26,9 @@ const page = () => {
                                     <TabList>
                                         <Tab>Manage</Tab>
                                         <Tab>Add new product</Tab>
-                                        <Tab>Orders</Tab>
+                                        <Tab>Active Orders</Tab>
+                                        <Tab>Completed Orders</Tab>
+
                                     </TabList>
                                     <TabPanels>
 
@@ -35,6 +38,10 @@ const page = () => {
 
                                         <TabPanel>
                                             <ProductUploader />
+                                        </TabPanel>
+
+                                        <TabPanel>
+                                            <OrderTable />
                                         </TabPanel>
 
                                     </TabPanels>

@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { Box, Image, Stack, Heading, Text, Button, ButtonGroup } from '@chakra-ui/react';
+import { CartItemContext } from '../context/CartContext';
 
 const ProductCard = ({ productItem, data }) => {
+  const [inCart, setInCart] = useState(false);
+  const productsInCart = useContext(CartItemContext);
+
   return (
 
     <Box borderWidth='1px' borderRadius='lg' w='350px' h='520px' overflow='hidden'>
@@ -19,12 +23,19 @@ const ProductCard = ({ productItem, data }) => {
       </Stack>
 
       <ButtonGroup m='3' spacing='2'>
-        <Button variant='solid' colorScheme='blue'>
-          Buy now
-        </Button>
-        <Button variant='ghost' colorScheme='blue' onClick={() => data(productItem.name, productItem.price, productItem.description, productItem.imageUrl, productItem.id)}>
-           Add to cart
-        </Button>
+        {!inCart? (<>
+                <Button variant='solid' colorScheme='blue'>
+                  Buy now
+                </Button>
+                <Button variant='ghost' colorScheme='blue' onClick={() => {data(productItem.name, productItem.price, productItem.description, productItem.imageUrl, productItem.id); setInCart(true)}}>
+                   Add to cart
+                </Button>
+                </>
+        ):(
+                  <Button variant='solid' colorScheme='blue'>
+                      Go to cart
+                  </Button>
+        )}
       </ButtonGroup>
     
     </Box>
