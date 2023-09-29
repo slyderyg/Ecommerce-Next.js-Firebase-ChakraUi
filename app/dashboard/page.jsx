@@ -5,6 +5,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel, Spinner } from '@chakra-ui/rea
 import ProductUploader from '../components/ProductUploader';
 import ManageTable from '../components/ManageTable';
 import OrderTable from '../components/OrderTable';
+import CompletedOrdersTable from '../components/CompletedOrdersTable';
 
 const page = () => {
 
@@ -42,6 +43,10 @@ const page = () => {
 
                                         <TabPanel>
                                             <OrderTable />
+                                        </TabPanel>
+
+                                        <TabPanel>
+                                            <CompletedOrdersTable />
                                         </TabPanel>
 
                                     </TabPanels>

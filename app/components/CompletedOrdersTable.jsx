@@ -5,11 +5,11 @@ import { collection, query, addDoc, onSnapshot, doc, deleteDoc } from 'firebase/
 import { getStorage, ref, deleteObject } from "firebase/storage";
 import { db } from '../firebase';
 
-const OrderTable = () => {
+const CompletedOrdersTable = () => {
     const [listOfOrders, setListOfOrders] = useState([]);
 
     useEffect(() => {
-        const q = query(collection(db, 'orders'));
+        const q = query(collection(db, 'completedOrders'));
         const unsubscribe = onSnapshot(q, (querySnapshot)=>{
             let productsArr = [];
 
@@ -21,9 +21,8 @@ const OrderTable = () => {
     }, []);
 
     const handleDeleteOrder = async (id) => {
-        await deleteDoc(doc(db, "orders", id));
+        await deleteDoc(doc(db, "completedOrders", id));
     };
-
 
   return (
     <Center>
@@ -49,8 +48,7 @@ const OrderTable = () => {
                             </Td>
                             <Td isNumeric>{el.totalPrice}</Td>
                             <Td w='200px'>
-                                <Button colorScheme='teal' size='xs' m='1' onClick={() => {newDoc(el.user, el.data, el.totalPrice); handleDeleteOrder(el.id)}}>Complete</Button>
-                                <Button colorScheme='red' size='xs' m='1' onClick={() => handleDeleteOrder(el.id)}>Cancel</Button>
+                                <Button colorScheme='red' size='xs' m='1' onClick={() => handleDeleteOrder(el.id)}>Delete</Button>
                             </Td>
                         </Tr>
                     )}
@@ -58,21 +56,8 @@ const OrderTable = () => {
             </Table>
         </TableContainer>
 
-
-    </Center>
+</Center>
   )
 }
 
-export default OrderTable;
-
-async function newDoc(user, data, totalPrice) {
-    try {
-        const docRef = await addDoc(collection(db, "completedOrders"), {
-            user: user,
-            data: data,
-            totalPrice: totalPrice
-        });
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-};
+export default CompletedOrdersTable
