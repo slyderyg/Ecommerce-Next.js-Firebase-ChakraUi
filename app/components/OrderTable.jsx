@@ -1,12 +1,15 @@
 'use client';
 import React, { useEffect, useState } from "react";
-import { Center, TableContainer, Table, Thead, Tbody, Tr, Th, Td, Button, Link } from '@chakra-ui/react';
+import { Center, TableContainer, Table, Thead, Tbody, Tr, Th, Td, Button, Link, Flex, Box } from '@chakra-ui/react';
 import { collection, query, addDoc, onSnapshot, doc, deleteDoc } from 'firebase/firestore';
 import { getStorage, ref, deleteObject } from "firebase/storage";
 import { db } from '../firebase';
+import Pagination from "./Pagination";
 
 const OrderTable = () => {
     const [listOfOrders, setListOfOrders] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [ordersPerPage] = useState(5);
 
     useEffect(() => {
         const q = query(collection(db, 'orders'));
@@ -24,8 +27,16 @@ const OrderTable = () => {
         await deleteDoc(doc(db, "orders", id));
     };
 
+    const lastOrderIndex = currentPage * ordersPerPage;
+    const firstOrderIndex = lastOrderIndex - ordersPerPage;
+    const currentOrder = listOfOrders.slice(firstOrderIndex, lastOrderIndex);
+
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber)
+    };
 
   return (
+    <>
     <Center>
 
         <TableContainer w='1600px'>
@@ -39,7 +50,7 @@ const OrderTable = () => {
                 </Tr>
                 </Thead>
                 <Tbody>
-                    {listOfOrders.map(el => 
+                    {currentOrder.map(el => 
                         <Tr key={el.id}>
                             <Td w='200px' overflow='hidden' whiteSpace='nowrap' textOverflow='ellipsis'>{el.user}</Td>
                             <Td>
@@ -58,8 +69,14 @@ const OrderTable = () => {
             </Table>
         </TableContainer>
 
-
     </Center>
+
+    <Center>
+        <Box>             
+            <Pagination ordersPerPage={ordersPerPage} totalOrders={listOfOrders.length} paginate={paginate} currentPage={currentPage}/>
+        </Box> 
+    </Center>
+    </>
   )
 }
 
