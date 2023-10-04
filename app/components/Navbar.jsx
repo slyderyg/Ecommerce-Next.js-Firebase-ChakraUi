@@ -66,13 +66,13 @@ const Navbar = () => {
                     <Link as={NextLink} href='/'>HOME</Link>
                 </Box>
                 <Box ml='6'>
-                    <Link as={NextLink} href='/'>CATALOG</Link>
+                    <Link as={NextLink} href='/catalog'>CATALOG</Link>
                 </Box>
                 <Box ml='6'>
-                    <Link as={NextLink} href='/'>ABOUT</Link>
+                    <Link as={NextLink} href='/about'>ABOUT</Link>
                 </Box>
                 <Box ml='6'>
-                    <Link as={NextLink} href='/'>CONTACTS</Link>
+                    <Link as={NextLink} href='/contacts'>CONTACTS</Link>
                 </Box>
                 <Box ml='6'>
                         <Link as={NextLink} href='/cart' color='green' ><Image src='/cart.svg'  boxSize='30px' alt='cart' /></Link>
@@ -139,13 +139,13 @@ const Navbar = () => {
                             <Link as={NextLink} href='/'>HOME</Link>
                         </MenuItem>
                         <MenuItem>
-                            <Link as={NextLink} href='/'>CATALOG</Link>
+                            <Link as={NextLink} href='/catalog'>CATALOG</Link>
                         </MenuItem>
                         <MenuItem>
-                            <Link as={NextLink} href='/'>ABOUT</Link>
+                            <Link as={NextLink} href='/about'>ABOUT</Link>
                         </MenuItem>
                         <MenuItem>
-                            <Link as={NextLink} href='/'>CONTACTS</Link>
+                            <Link as={NextLink} href='/contacts'>CONTACTS</Link>
                         </MenuItem>                                                                     
                     </MenuList>
                 </Menu>
@@ -176,13 +176,13 @@ const Navbar = () => {
                                 <Link as={NextLink} href='/'>HOME</Link>
                             </MenuItem>
                             <MenuItem>
-                                <Link as={NextLink} href='/'>CATALOG</Link>
+                                <Link as={NextLink} href='/catalog'>CATALOG</Link>
                             </MenuItem>
                             <MenuItem>
-                                <Link as={NextLink} href='/'>ABOUT</Link>
+                                <Link as={NextLink} href='/about'>ABOUT</Link>
                             </MenuItem>
                             <MenuItem>
-                                <Link as={NextLink} href='/'>CONTACTS</Link>
+                                <Link as={NextLink} href='/contacts'>CONTACTS</Link>
                             </MenuItem>     
                             <MenuItem>
                             <Link as={NextLink} href='/dashboard' color='green' >DASHBOARD</Link>

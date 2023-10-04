@@ -11,19 +11,19 @@ const Pagination = ({ ordersPerPage, totalOrders, paginate, currentPage }) => {
 
   return (
     <div>
-        {pageNumbers.map(number => 
+        {pageNumbers.map(number => <div key={number} style={{display: 'inline-block'}}>
         {number === currentPage? (
             
-            <div key={number} onClick={() => paginate(number)} style={{display: 'inline-block', padding: '10px', margin: '5px', borderRadius: '5px', cursor: 'pointer', backgroundColor: 'teal'}}>
+            <div onClick={() => paginate(number)} style={{display: 'inline-block', padding: '10px', margin: '5px', borderRadius: '5px', cursor: 'pointer', backgroundColor: '#B2F5EA'}}>
                 {number}
             </div>
         ):(
-            <div key={number} onClick={() => paginate(number)} style={{display: 'inline-block', padding: '10px', margin: '5px', borderRadius: '5px', cursor: 'pointer'}}>
+            <div onClick={() => paginate(number)} style={{display: 'inline-block', padding: '10px', margin: '5px', borderRadius: '5px', cursor: 'pointer'}}>
                 {number}
             </div>
 
         )}
-
+</div>
         )}
     </div>
   )

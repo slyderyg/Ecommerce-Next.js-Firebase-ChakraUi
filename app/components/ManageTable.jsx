@@ -4,10 +4,13 @@ import { collection, query, where, onSnapshot, doc, deleteDoc } from 'firebase/f
 import { getStorage, ref, deleteObject } from "firebase/storage";
 import { db } from '../firebase';
 import EditProductItemModal from "./EditProductItemModal";
+import Pagination from "./Pagination";
 
 const ManageTable = () => {
 
     const [productItem, setProductItem] = useState([]); //downloading product list
+    const [currentPage, setCurrentPage] = useState(1);
+    const [productsPerPage] = useState(5);
 
     // useEffect for downloading product list and subscribe for updates
     useEffect(() => {
@@ -38,9 +41,17 @@ const ManageTable = () => {
         });
     };
 
+    const lastProductIndex = currentPage * productsPerPage;
+    const firstProductIndex = lastProductIndex - productsPerPage;
+    const currentProduct = productItem.slice(firstProductIndex, lastProductIndex);
+
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber)
+    };
+
 
     return (
-        
+        <>
         <Center>
 
                     <TableContainer w='1600px'>
@@ -54,7 +65,7 @@ const ManageTable = () => {
                             </Tr>
                             </Thead>
                             <Tbody>
-                                {productItem.length > 0 ? (productItem.map(el =>
+                                {productItem.length > 0 ? (currentProduct.map(el =>
                             <Tr key={el.id}>
                                 <Td>{el.name}</Td>
                                 <Td><Box width='600px' overflow='hidden' whiteSpace='nowrap' textOverflow='ellipsis'>{el.description}</Box></Td>
@@ -71,7 +82,13 @@ const ManageTable = () => {
 
 
         </Center>
- 
+
+        <Center>
+            <Box>             
+                <Pagination ordersPerPage={productsPerPage} totalOrders={productItem.length} paginate={paginate} currentPage={currentPage}/>
+            </Box> 
+        </Center>
+        </>
     )
 };
 
