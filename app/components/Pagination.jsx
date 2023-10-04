@@ -12,19 +12,18 @@ const Pagination = ({ ordersPerPage, totalOrders, paginate, currentPage }) => {
   return (
     <div>
         {pageNumbers.map(number => 
-            <>
-            {
-            number === currentPage? (
-                <span key={number} style={{margin: '5px', cursor: 'pointer', backgroundColor: '#b2f5ea'}} onClick={() => paginate(number)}>
+        {number === currentPage? (
+            
+            <div key={number} onClick={() => paginate(number)} style={{display: 'inline-block', padding: '10px', margin: '5px', borderRadius: '5px', cursor: 'pointer', backgroundColor: 'teal'}}>
                 {number}
-                </span>
-            ):(
-                <span key={number} style={{margin: '5px', cursor: 'pointer'}} onClick={() => paginate(number)}>
+            </div>
+        ):(
+            <div key={number} onClick={() => paginate(number)} style={{display: 'inline-block', padding: '10px', margin: '5px', borderRadius: '5px', cursor: 'pointer'}}>
                 {number}
-                </span>
-            )
-            }
-            </>
+            </div>
+
+        )}
+
         )}
     </div>
   )
